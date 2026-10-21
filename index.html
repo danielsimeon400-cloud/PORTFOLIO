@@ -334,7 +334,7 @@ section{padding:120px 0}
 /* ---------- work rows ---------- */
 #grid{grid-template-columns:1fr;gap:88px;margin-top:56px}
 .case.wide{gap:28px}
-.case.wide:hover .mock{transform:none}
+
 .shotmock3{display:flex!important;align-items:center;justify-content:center;gap:3.2%;aspect-ratio:16/8.4;padding:0 6%}
 .shotmock3 img{width:20.5%;height:auto;border-radius:clamp(12px,1.7vw,26px);box-shadow:0 24px 48px rgba(0,0,0,.24);transition:transform .55s var(--ease)}
 .shotmock3 img.p2{transform:translateY(-5%)}
@@ -402,6 +402,69 @@ section{padding:120px 0}
 .tgroup li{font-family:var(--display);font-weight:700;font-size:15px;padding:7px 13px;border-radius:999px;background:var(--paper);transition:transform .25s var(--ease),background .25s,color .25s}
 .tgroup li:hover{transform:translateY(-2px);background:var(--ink);color:var(--paper)}
 @media (max-width:860px){.tools{grid-template-columns:1fr}}
+
+/* ---------- guitar buddy ---------- */
+:root{--bud-shirt:#1C1814;--bud-pants:#2E2823;--bud-skin:#7A4A2E;--bud-hair:#151210}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bud-shirt:#4A423A;--bud-pants:#5A5148;--bud-hair:#0B0908}}
+:root[data-theme="dark"]{--bud-shirt:#4A423A;--bud-pants:#5A5148;--bud-hair:#0B0908}
+.bud-stage{position:absolute;left:0;right:0;bottom:6px;height:140px;pointer-events:none;z-index:2}
+.bud{position:absolute;left:0;bottom:0;width:116px;height:136px;pointer-events:auto;cursor:pointer;will-change:transform;outline:none}
+.bud:focus-visible .bud-flip{outline:2px solid var(--signal);outline-offset:4px;border-radius:12px}
+.bud-flip{width:100%;height:100%;transition:transform .25s var(--ease)}
+.bud.left .bud-flip{transform:scaleX(-1)}
+.bud svg{width:100%;height:100%;overflow:visible}
+.bud .shirt{fill:var(--bud-shirt)}.bud .pants{fill:var(--bud-pants)}.bud .skin{fill:var(--bud-skin)}.bud .hair{fill:var(--bud-hair)}
+.bud .leg{transform-box:fill-box;transform-origin:50% 0}
+.bud .arm-strum{transform-box:fill-box;transform-origin:85% 10%}
+.bud .head{transform-box:fill-box;transform-origin:50% 90%}
+.bud .whole{transform-box:fill-box;transform-origin:50% 100%;animation:breathe 2.4s ease-in-out infinite}
+@keyframes breathe{50%{transform:scaleY(1.015)}}
+.bud.walking .whole{animation:hop .36s ease-in-out infinite}
+@keyframes hop{50%{transform:translateY(-3px)}}
+.bud.walking .leg.l{animation:legA .36s ease-in-out infinite}
+.bud.walking .leg.r{animation:legB .36s ease-in-out infinite}
+@keyframes legA{0%,100%{transform:rotate(18deg)}50%{transform:rotate(-18deg)}}
+@keyframes legB{0%,100%{transform:rotate(-18deg)}50%{transform:rotate(18deg)}}
+.bud.playing .arm-strum{animation:strum .34s ease-in-out infinite}
+@keyframes strum{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(16deg)}}
+.bud.playing .head{animation:nod .68s ease-in-out infinite}
+@keyframes nod{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg) translateY(1px)}}
+.bud.playing .leg.r{animation:tap .68s ease-in-out infinite}
+@keyframes tap{50%{transform:rotate(-10deg)}}
+.note-fly{position:absolute;bottom:100px;font-size:20px;line-height:1;color:var(--signal);pointer-events:none;animation:fly 1.8s var(--ease) forwards;font-family:system-ui,sans-serif}
+@keyframes fly{0%{opacity:0;transform:translate(0,0) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),-90px) rotate(var(--rot))}}
+.bud-say{position:absolute;bottom:140px;left:50%;transform:translateX(-50%) rotate(-2deg) scale(.6);opacity:0;white-space:nowrap;background:var(--ink);color:var(--paper);font-family:var(--hand);font-style:italic;font-size:19px;line-height:1;padding:9px 14px 11px;border-radius:14px;pointer-events:none;transition:opacity .25s,transform .35s var(--ease)}
+.bud-say::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:var(--ink);transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.bud-say.show{opacity:1;transform:translateX(-50%) rotate(-2deg) scale(1)}
+.bud.left .bud-say{transform:translateX(-50%) scaleX(1) rotate(-2deg)}
+.floor-hint{position:absolute;right:0;bottom:2px;font-family:var(--hand);font-style:italic;font-size:15px;color:var(--muted);pointer-events:none;opacity:.8}
+@media (max-width:860px){.bud-stage{bottom:0;height:100px}.bud{width:80px;height:94px}.floor-hint{display:none}.bud-say{font-size:16px;bottom:98px}}
+@media (prefers-reduced-motion:reduce){.bud *{animation:none!important}.note-fly{display:none}}
+
+/* ---------- more micro-interactions ---------- */
+.contact{position:relative}
+.bud2-stage{position:absolute;right:3%;bottom:30px;width:150px;height:160px;pointer-events:none}
+.bud2-stage .bud{left:auto;right:0;transform:none!important}
+.bud.cheer .whole{animation:jump .45s var(--ease) 3!important}
+@keyframes jump{40%{transform:translateY(-16px) rotate(-3deg)}}
+.case.wide .mock.shotmock3{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.case.wide .mock.shotmock3:not(:hover){--rx:0deg;--ry:0deg;transition:transform .6s var(--ease)}
+#funnel{position:relative}
+.pulse-dot{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--signal);box-shadow:0 0 0 0 color-mix(in srgb,var(--signal) 55%,transparent);transition:left .6s var(--ease),top .3s;animation:ping 1.6s ease-out infinite;pointer-events:none;opacity:0}
+.pulse-dot.on{opacity:1}
+@keyframes ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--signal) 55%,transparent)}100%{box-shadow:0 0 0 16px transparent}}
+.stage .n{transition:color .25s}.stage:hover .n{color:var(--signal-deep)}
+.stage h3{transition:transform .35s var(--ease)}.stage:hover h3{transform:translateX(6px)}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.w>span{display:inline-block;transform:translateY(108%);transition:transform .75s var(--ease);transition-delay:calc(var(--i)*45ms)}
+.words-in .w>span{transform:none}
+.clogo{transition:transform .35s var(--ease)}.cert:hover .clogo{transform:rotate(-6deg) scale(1.08)}
+.tgroup li:nth-child(odd):hover{transform:translateY(-3px) rotate(-3deg)}
+.tgroup li:nth-child(even):hover{transform:translateY(-3px) rotate(3deg)}
+.bcard b,.job h3{background:linear-gradient(var(--signal),var(--signal)) 0 100%/0 2px no-repeat;transition:background-size .45s var(--ease),color .25s}
+.bcard:hover b,.job:hover h3{background-size:100% 2px}
+@media (max-width:860px){.bud2-stage{position:relative;right:auto;bottom:auto;margin:36px auto 0;width:120px;height:140px}.bud2-stage .bud{right:auto;left:0}}
+@media (prefers-reduced-motion:reduce){.w>span{transform:none!important}.pulse-dot{animation:none}.case.wide .mock.shotmock3{transform:none}}
 /* ---------- words ---------- */
 .quotes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:56px}
 .quotes blockquote{margin:0;padding:0}
@@ -514,6 +577,43 @@ section{padding:120px 0}
   </div>
 
   <a class="scrollcue" href="#funnel"><span>Scroll for the funnel</span><span class="av" aria-hidden="true"><img src="data:image/webp;base64,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" alt=""></span><span class="ar" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+<div class="bud-stage">
+    <div class="bud" id="bud" role="button" tabindex="0" aria-label="A little guitarist. Press to hear a strum.">
+      <span class="bud-say" id="budSay"></span>
+      <div class="bud-flip"><svg viewBox="0 0 120 140" aria-hidden="true">
+  <ellipse cx="60" cy="136" rx="30" ry="4" fill="currentColor" opacity=".12"/>
+  <g class="whole">
+    <g class="leg l"><rect class="pants" x="49" y="96" width="10" height="34" rx="5"/><rect x="45" y="126" width="16" height="8" rx="4" fill="#F2541B"/></g>
+    <g class="leg r"><rect class="pants" x="62" y="96" width="10" height="34" rx="5"/><rect x="60" y="126" width="16" height="8" rx="4" fill="#F2541B"/></g>
+    <path class="shirt" d="M42 62c0-8 8-12 18-12s18 4 18 12v38c0 3-2 4-5 4H47c-3 0-5-1-5-4z"/>
+    <rect class="skin" x="55" y="44" width="10" height="10" rx="3"/>
+    <g class="head">
+      <circle class="skin" cx="60" cy="32" r="17"/>
+      <path class="hair" d="M43 30c0-11 8-17 17-17s17 6 17 16c-3-4-8-6-17-6s-14 3-17 7z"/>
+      <circle cx="54" cy="34" r="1.8" fill="#151210"/><circle cx="66" cy="34" r="1.8" fill="#151210"/>
+      <path d="M55 40c3 2.5 7 2.5 10 0" stroke="#151210" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <ellipse cx="50" cy="38" rx="2.6" ry="1.6" fill="#F2541B" opacity=".35"/><ellipse cx="70" cy="38" rx="2.6" ry="1.6" fill="#F2541B" opacity=".35"/>
+    </g>
+    <g class="guitar" transform="rotate(-28 62 82)">
+      <rect x="64" y="77" width="44" height="6" rx="2" fill="#6B4A2E"/>
+      <rect x="104" y="74" width="10" height="12" rx="2.5" fill="#3A2A1E"/>
+      <circle cx="108" cy="75" r="1.4" fill="#E9DCC6"/><circle cx="111" cy="85" r="1.4" fill="#E9DCC6"/>
+      <circle cx="46" cy="80" r="15" fill="#F2541B"/><circle cx="62" cy="80" r="11" fill="#F2541B"/>
+      <circle cx="56" cy="80" r="4.5" fill="#1C1814"/>
+      <rect x="39" y="77" width="6" height="6" rx="1.5" fill="#1C1814"/>
+      <path d="M41 80H108" stroke="#FAF7F0" stroke-width=".7" opacity=".8"/>
+    </g>
+    <path class="shirt" d="M74 62c8 2 14 8 20 10" stroke="var(--bud-shirt)" stroke-width="9" stroke-linecap="round" fill="none" style="stroke:var(--bud-shirt)"/>
+    <circle class="skin" cx="95" cy="72" r="4.5"/>
+    <g class="arm-strum">
+      <path d="M46 62c-6 6-6 16 2 22" stroke-width="9" stroke-linecap="round" fill="none" style="stroke:var(--bud-shirt)"/>
+      <circle class="skin" cx="50" cy="86" r="4.5"/>
+    </g>
+  </g>
+</svg></div>
+    </div>
+    <span class="floor-hint">psst, tap the guitarist</span>
+  </div>
 </header>
 
 <!-- FUNNEL -->
@@ -665,6 +765,42 @@ section{padding:120px 0}
     <a class="btn magnetic" href="mailto:danielsimeon1000@gmail.com">Email me</a>
     <button class="btn ghost magnetic" id="copyBtn" data-email="danielsimeon1000@gmail.com">Copy email</button><span class="copied" id="copied" aria-live="polite"></span>
   </div>
+  <div class="bud2-stage" id="bud2Stage">
+    <div class="bud playing" id="bud2" role="button" tabindex="0" aria-label="The guitarist again. Press for an encore.">
+      <span class="bud-say" id="bud2Say"></span>
+      <div class="bud-flip" style="transform:scaleX(-1)"><svg viewBox="0 0 120 140" aria-hidden="true">
+  <ellipse cx="60" cy="136" rx="30" ry="4" fill="currentColor" opacity=".12"/>
+  <g class="whole">
+    <g class="leg l"><rect class="pants" x="49" y="96" width="10" height="34" rx="5"/><rect x="45" y="126" width="16" height="8" rx="4" fill="#F2541B"/></g>
+    <g class="leg r"><rect class="pants" x="62" y="96" width="10" height="34" rx="5"/><rect x="60" y="126" width="16" height="8" rx="4" fill="#F2541B"/></g>
+    <path class="shirt" d="M42 62c0-8 8-12 18-12s18 4 18 12v38c0 3-2 4-5 4H47c-3 0-5-1-5-4z"/>
+    <rect class="skin" x="55" y="44" width="10" height="10" rx="3"/>
+    <g class="head">
+      <circle class="skin" cx="60" cy="32" r="17"/>
+      <path class="hair" d="M43 30c0-11 8-17 17-17s17 6 17 16c-3-4-8-6-17-6s-14 3-17 7z"/>
+      <circle cx="54" cy="34" r="1.8" fill="#151210"/><circle cx="66" cy="34" r="1.8" fill="#151210"/>
+      <path d="M55 40c3 2.5 7 2.5 10 0" stroke="#151210" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <ellipse cx="50" cy="38" rx="2.6" ry="1.6" fill="#F2541B" opacity=".35"/><ellipse cx="70" cy="38" rx="2.6" ry="1.6" fill="#F2541B" opacity=".35"/>
+    </g>
+    <g class="guitar" transform="rotate(-28 62 82)">
+      <rect x="64" y="77" width="44" height="6" rx="2" fill="#6B4A2E"/>
+      <rect x="104" y="74" width="10" height="12" rx="2.5" fill="#3A2A1E"/>
+      <circle cx="108" cy="75" r="1.4" fill="#E9DCC6"/><circle cx="111" cy="85" r="1.4" fill="#E9DCC6"/>
+      <circle cx="46" cy="80" r="15" fill="#F2541B"/><circle cx="62" cy="80" r="11" fill="#F2541B"/>
+      <circle cx="56" cy="80" r="4.5" fill="#1C1814"/>
+      <rect x="39" y="77" width="6" height="6" rx="1.5" fill="#1C1814"/>
+      <path d="M41 80H108" stroke="#FAF7F0" stroke-width=".7" opacity=".8"/>
+    </g>
+    <path class="shirt" d="M74 62c8 2 14 8 20 10" stroke="var(--bud-shirt)" stroke-width="9" stroke-linecap="round" fill="none" style="stroke:var(--bud-shirt)"/>
+    <circle class="skin" cx="95" cy="72" r="4.5"/>
+    <g class="arm-strum">
+      <path d="M46 62c-6 6-6 16 2 22" stroke-width="9" stroke-linecap="round" fill="none" style="stroke:var(--bud-shirt)"/>
+      <circle class="skin" cx="50" cy="86" r="4.5"/>
+    </g>
+  </g>
+</svg></div>
+    </div>
+  </div>
 </section>
 
 <footer class="foot">
@@ -783,6 +919,91 @@ section{padding:120px 0}
     catch(e){ cp.textContent = cb.dataset.email; }
     cp.classList.add('show'); setTimeout(()=>cp.classList.remove('show'), 2400);
   });
+
+  // Guitar buddy: wanders the hero floor, stops to play, strums when tapped
+  (function(){
+    const bud=document.getElementById('bud'); if(!bud) return;
+    const stage=bud.parentElement, say=document.getElementById('budSay');
+    const lines=['playing in the key of conversion','this riff never churns','one more chorus, then the paywall','tuned to how people behave','tap again for the bridge','request a song? hire me'];
+    let x=-140, target=90, mode='walk', until=0, running=true, li=0, ctx=null, last=performance.now();
+    const W=()=>stage.clientWidth-bud.offsetWidth;
+    function note(n=1){for(let i=0;i<n;i++){const s=document.createElement('span');s.className='note-fly';s.textContent=Math.random()<.5?'\u266A':'\u266B';s.style.left=(x+bud.offsetWidth*0.55+(Math.random()*20-10))+'px';s.style.setProperty('--dx',(Math.random()*60-30)+'px');s.style.setProperty('--rot',(Math.random()*60-30)+'deg');s.style.animationDelay=(i*0.12)+'s';stage.appendChild(s);setTimeout(()=>s.remove(),2200+i*120);}}
+    function setMode(m){mode=m;bud.classList.toggle('walking',m==='walk');bud.classList.toggle('playing',m==='play');}
+    function pick(){const w=W();let t=Math.random()*w;if(Math.abs(t-x)<120)t=(x+w/2)%w;target=t;bud.classList.toggle('left',target<x);setMode('walk');}
+    let noteTimer=0;
+    function frame(now){
+      const dt=Math.min(.05,(now-last)/1000);last=now;
+      if(running){
+        if(mode==='walk'){const dir=Math.sign(target-x),step=70*dt;if(Math.abs(target-x)<=step){x=target;setMode('play');until=now+3000+Math.random()*2500;}else x+=dir*step;}
+        else if(now>until){pick();}
+        if(mode==='play'&&now-noteTimer>700){noteTimer=now;note(1);}
+        bud.style.transform='translateX('+x+'px)';
+      }
+      requestAnimationFrame(frame);
+    }
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(reduce){setMode('play');x=Math.max(0,W()*0.15);bud.style.transform='translateX('+x+'px)';}
+    else{setMode('walk');requestAnimationFrame(frame);
+      new IntersectionObserver(es=>{running=es[0].isIntersecting;last=performance.now();},{threshold:0}).observe(stage);
+      document.addEventListener('visibilitychange',()=>{running=!document.hidden;last=performance.now();});}
+    function strum(){
+      try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();const t0=ctx.currentTime;
+        [98,123.47,146.83,196,246.94,392].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain(),lp=ctx.createBiquadFilter();o.type='triangle';o.frequency.value=f;lp.type='lowpass';lp.frequency.value=1800;const t=t0+i*0.022;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.07,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+1.6);o.connect(lp);lp.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+1.7);});}catch(e){}
+    }
+    let sayT=0;
+    function play(){setMode('play');until=performance.now()+3500;strum();note(4);say.textContent=lines[li%lines.length];li++;say.classList.add('show');clearTimeout(sayT);sayT=setTimeout(()=>say.classList.remove('show'),2200);const h=stage.querySelector('.floor-hint');if(h)h.remove();}
+    bud.addEventListener('click',play);
+    bud.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});
+    addEventListener('resize',()=>{x=Math.min(x,W());target=Math.min(target,W());});
+  })();
+
+  // Shared strum
+  window.__strum=function(freqs){try{const c=window.__actx=window.__actx||new (window.AudioContext||window.webkitAudioContext)();const t0=c.currentTime;freqs.forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain(),lp=c.createBiquadFilter();o.type='triangle';o.frequency.value=f;lp.type='lowpass';lp.frequency.value=1800;const t=t0+i*0.022;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.07,t+0.01);g.gain.exponentialRampToValueAtTime(0.0001,t+1.6);o.connect(lp);lp.connect(g);g.connect(c.destination);o.start(t);o.stop(t+1.7);});}catch(e){}};
+  const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Footer guitarist: cheers when you arrive, encore on tap
+  (function(){
+    const b=document.getElementById('bud2'); if(!b) return;
+    const st=document.getElementById('bud2Stage'), say=document.getElementById('bud2Say');
+    const lines=['you made it to the end','encore? email me','this one’s for the hiring manager','thanks for scrolling','last song, then let’s talk'];
+    let i=0,t=0,greeted=false;
+    function notes(n){if(reduceM)return;for(let k=0;k<n;k++){const s=document.createElement('span');s.className='note-fly';s.textContent=Math.random()<.5?'\u266A':'\u266B';s.style.left=(st.clientWidth*0.5+(Math.random()*30-15))+'px';s.style.setProperty('--dx',(Math.random()*60-30)+'px');s.style.setProperty('--rot',(Math.random()*60-30)+'deg');s.style.animationDelay=(k*0.12)+'s';st.appendChild(s);setTimeout(()=>s.remove(),2300+k*120);}}
+    function talk(txt){say.textContent=txt;say.classList.add('show');clearTimeout(t);t=setTimeout(()=>say.classList.remove('show'),2400);}
+    function cheer(){b.classList.remove('cheer');void b.offsetWidth;b.classList.add('cheer');}
+    new IntersectionObserver(es=>{if(es[0].isIntersecting&&!greeted){greeted=true;cheer();notes(3);talk(lines[0]);i=1;}},{threshold:.6}).observe(st);
+    function encore(){window.__strum([146.83,220,293.66,369.99,440,587.33]);cheer();notes(5);talk(lines[i%lines.length]);i++;}
+    b.addEventListener('click',encore);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();encore();}});
+    setInterval(()=>{if(greeted&&!document.hidden)notes(1);},1400);
+  })();
+
+  // Case study screens tilt toward the cursor
+  if(matchMedia('(pointer:fine)').matches&&!reduceM){
+    document.querySelectorAll('.shotmock3').forEach(m=>{
+      m.addEventListener('pointermove',e=>{const r=m.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;m.style.setProperty('--ry',(px*8)+'deg');m.style.setProperty('--rx',(-py*6)+'deg');});
+      m.addEventListener('pointerleave',()=>{m.style.removeProperty('--ry');m.style.removeProperty('--rx');});
+    });
+  }
+
+  // A heartbeat dot rides the funnel line to the stage you hover
+  (function(){
+    const sec=document.getElementById('funnel'),pulse=document.getElementById('pulse');if(!sec||!pulse)return;
+    const dot=document.createElement('span');dot.className='pulse-dot';sec.appendChild(dot);
+    const stages=[...sec.querySelectorAll('.stage')];
+    function moveTo(el){const sr=sec.getBoundingClientRect(),pr=pulse.getBoundingClientRect(),er=el.getBoundingClientRect();dot.style.left=(er.left-sr.left+Math.min(er.width*0.35,90))+'px';dot.style.top=(pr.top-sr.top+pr.height*0.57)+'px';dot.classList.add('on');}
+    stages.forEach(s=>s.addEventListener('pointerenter',()=>moveTo(s)));
+    const home=stages[2]||stages[0];
+    new IntersectionObserver(es=>{if(es[0].isIntersecting)moveTo(home);},{threshold:.3}).observe(pulse);
+    sec.addEventListener('pointerleave',()=>moveTo(home));
+    addEventListener('resize',()=>moveTo(home));
+  })();
+
+  // Headings rise in word by word
+  (function(){
+    const hs=document.querySelectorAll('.h2, .big');
+    hs.forEach(h=>{let i=0;const walk=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const parts=c.textContent.split(/(\s+)/);const frag=document.createDocumentFragment();parts.forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){frag.appendChild(document.createTextNode(p));return;}const w=document.createElement('span');w.className='w';const inner=document.createElement('span');inner.textContent=p;inner.style.setProperty('--i',i++);w.appendChild(inner);frag.appendChild(w);});c.replaceWith(frag);}else if(c.nodeType===1&&c.tagName!=='BR'){walk(c);}});};walk(h);});
+    const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('words-in');io2.unobserve(e.target);}}),{threshold:.3});
+    hs.forEach(h=>io2.observe(h));
+  })();
 })();
 </script>
 </body>
