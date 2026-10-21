@@ -7,7 +7,7 @@
 <meta name="description" content="Freelancers who work for clients abroad invoice by hand, chase late payments, and lose money to exchange rates they can’t see. Paylark makes getting p">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-<style>:root{--hero:#ECECEC;--heroInk:#111111;--heroSub:#5A5A5A;--accent:#8B5CF6;--accentSoft:#F1EBFF;--accentText:#6D3FD6;--stage:#E2E2E2}
+<style>:root{--hero:#ECECEC;--heroInk:#111111;--heroSub:#5A5A5A;--accent:#8B5CF6;--accentSoft:#F1EBFF;--accentText:#6D3FD6;--stage:#E2E2E2}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hero:#1B1B1B;--heroInk:#F2F2F2;--heroSub:#A9A9A9;--stage:#262626}}:root[data-theme="dark"]{--hero:#1B1B1B;--heroInk:#F2F2F2;--heroSub:#A9A9A9;--stage:#262626}
 :root{--paper:#FAF7F0;--paper-2:#EFEAE0;--ink:#1C1814;--ink-soft:#4A443C;--muted:#6B645A;--line:#DDD5C7;--signal:#F2541B;--signal-deep:#C9400C;
 --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--body:"Geist","Helvetica Neue",Arial,sans-serif;--hand:"Instrument Serif",Georgia,serif;--ease:cubic-bezier(.2,.8,.2,1);
 color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -23,11 +23,14 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bar a{text-decoration:none}
 .back{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:var(--display);font-weight:700;font-size:15px}
 .back svg{width:16px;height:16px;transition:transform .3s var(--ease)}.back:hover svg{transform:translateX(-3px)}
+.barright{display:flex;align-items:center;gap:12px}
 .who{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.03em}
 .progress{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--accent)}
 .hero{background:var(--hero);color:var(--heroInk);padding:clamp(56px,8vw,110px) clamp(18px,4vw,48px) 0;overflow:hidden}
 .wrap{max-width:1180px;margin:0 auto}
 .brandlogo{width:min(240px,60vw);height:auto;margin:0 0 22px}
+:root[data-theme="dark"] .brandlogo{background:#FFF;padding:10px 16px;border-radius:16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brandlogo{background:#FFF;padding:10px 16px;border-radius:16px}}
 .kick{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px;background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--heroInk);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent)}
 .kick i{width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1.5px currentColor}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6.4vw,88px);line-height:.92;letter-spacing:-.05em;margin:22px 0 0;max-width:15ch}
@@ -97,6 +100,17 @@ section>h2 small{display:block;font-family:var(--body);font-weight:400;font-size
 .lb .x{top:calc(18px + env(safe-area-inset-top,0px));right:18px}.lb .pv{left:14px;top:50%;transform:translateY(-50%)}.lb .nx{right:14px;top:50%;transform:translateY(-50%)}
 .lb .cap{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#fff;font-family:var(--display);font-weight:700;font-size:15px}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.reveal.in{opacity:1;transform:none}
+/* ---------- theme toggle ---------- */
+.theme-btn{position:relative;width:44px;height:44px;flex:none;border-radius:14px;border:0;cursor:pointer;background:var(--paper-2);color:var(--ink);display:grid;place-items:center;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s}
+.theme-btn:hover{transform:rotate(-8deg) scale(1.06)}
+.theme-btn:active{transform:scale(.92)}
+.theme-btn svg{position:absolute;width:20px;height:20px;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.theme-btn .i-moon{transform:translateY(130%) rotate(-60deg);opacity:0}
+.is-dark .theme-btn .i-sun{transform:translateY(-130%) rotate(90deg);opacity:0}
+.is-dark .theme-btn .i-moon{transform:none;opacity:1}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+.theme-anim,.theme-anim *{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease,box-shadow .4s ease!important}
+
 @media (max-width:900px){
  .snap{grid-template-columns:1fr 1fr}
  section{grid-template-columns:1fr;gap:20px;padding:56px 0}
@@ -111,9 +125,11 @@ section>h2 small{display:block;font-family:var(--body);font-weight:400;font-size
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reel button{opacity:1;transform:none}.reveal{opacity:1;transform:none}}
 </style>
+<meta name="theme-color" content="#FAF7F0">
+<script>try{var t=localStorage.getItem('sd-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
-<header class="bar"><a class="back" href="/"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> All work</a><span class="who">Simeon Daniel</span><span class="progress" id="prog" aria-hidden="true"></span></header>
+<header class="bar"><a class="back" href="/"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> All work</a><span class="barright"><span class="who">Simeon Daniel</span><button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode"><svg class="i-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 1 1 9.4 4a6.6 6.6 0 0 0 10.6 10.6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></span><span class="progress" id="prog" aria-hidden="true"></span></header>
 <div class="hero"><div class="wrap">
 <span class="kick"><i></i>Fintech</span>
 <h1>Paylark: getting paid in dollars, without the guesswork</h1>
@@ -154,7 +170,7 @@ section>h2 small{display:block;font-family:var(--body);font-weight:400;font-size
  let sx=0;lb.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(cur+(dx<0?1:-1));});
  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
- const pr=document.getElementById('prog');addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;pr.style.width=(m>0?scrollY/m*100:0)+'%';},{passive:true});
+ const pr=document.getElementById('prog');   /* theme toggle */   (function(){     const btn=document.getElementById('themeBtn'); if(!btn) return;     const root=document.documentElement, mq=matchMedia('(prefers-color-scheme: dark)');     const current=()=>root.getAttribute('data-theme')||(mq.matches?'dark':'light');     function paint(){const d=current()==='dark';root.classList.toggle('is-dark',d);btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=d?'#15130F':'#FAF7F0';}     function apply(t){root.setAttribute('data-theme',t);try{localStorage.setItem('sd-theme',t)}catch(e){}paint();}     paint(); mq.addEventListener&&mq.addEventListener('change',()=>{if(!root.hasAttribute('data-theme'))paint();});     btn.addEventListener('click',e=>{       const next=current()==='dark'?'light':'dark';       const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;       if(document.startViewTransition&&!reduce){         const r=btn.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));         const vt=document.startViewTransition(()=>apply(next));         vt.ready.then(()=>root.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+R+'px at '+x+'px '+y+'px)']},{duration:650,easing:'cubic-bezier(.2,.8,.2,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});       }else{root.classList.add('theme-anim');apply(next);setTimeout(()=>root.classList.remove('theme-anim'),450);}     });   })(); addEventListener('scroll',()=>{const m=document.documentElement.scrollHeight-innerHeight;pr.style.width=(m>0?scrollY/m*100:0)+'%';},{passive:true});
 })();
 </script>
 </body>
