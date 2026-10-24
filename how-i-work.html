@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How I work and my design system | Simeon Daniel</title>
+<meta name="description" content="Simeon Daniel’s product design process, design system approach, accessibility standards, and how he works with engineers and product managers.">
+<meta name="theme-color" content="#FAF7F0">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('sd-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+:root{--paper:#FAF7F0;--paper-2:#EFEAE0;--ink:#1C1814;--ink-soft:#4A443C;--muted:#6B645A;--line:#DDD5C7;--signal:#F2541B;--signal-deep:#C9400C;--on-signal:#1C1814;
+--display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;--body:"Geist","Helvetica Neue",Arial,sans-serif;--mono:"Geist Mono",ui-monospace,Menlo,monospace;--hand:"Instrument Serif",Georgia,serif;--ease:cubic-bezier(.2,.8,.2,1);
+color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#15130F;--paper-2:#211E19;--ink:#F4EFE5;--ink-soft:#CFC7B9;--muted:#A39B8E;--line:#38332B;--signal:#FF6630;--signal-deep:#FF8152;--on-signal:#15130F;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#15130F;--paper-2:#211E19;--ink:#F4EFE5;--ink-soft:#CFC7B9;--muted:#A39B8E;--line:#38332B;--signal:#FF6630;--signal-deep:#FF8152;--on-signal:#15130F;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:6px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px clamp(18px,4vw,48px);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--paper)}
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-family:var(--display);font-weight:700;font-size:15px;text-decoration:none}
+.back svg{width:16px;height:16px;transition:transform .3s var(--ease)}.back:hover svg{transform:translateX(-3px)}
+.barright{display:flex;align-items:center;gap:12px}.who{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:-.03em}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+.hero{padding:clamp(64px,9vw,120px) 0 40px}
+.kick{font-family:var(--display);font-weight:700;font-size:14px;color:var(--signal-deep)}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,96px);line-height:.92;letter-spacing:-.05em;margin:16px 0 0;max-width:14ch}
+.lede{font-size:clamp(18px,1.8vw,22px);line-height:1.5;color:var(--ink-soft);max-width:56ch;margin:24px 0 0}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin:36px 0 0;padding:0;list-style:none}
+.jump a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);text-decoration:none;font-family:var(--display);font-weight:700;font-size:15px;transition:background .2s,color .2s,box-shadow .2s}
+.jump a:hover{background:var(--ink);color:var(--paper);box-shadow:none}
+section{padding:88px 0;border-top:1px solid var(--line)}
+.sh{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:48px;align-items:start;margin-bottom:48px}
+.sh small{display:block;font-size:14px;color:var(--muted);margin-bottom:8px}
+.sh h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,3.6vw,48px);letter-spacing:-.045em;line-height:.95;margin:0}
+.sh p{margin:0;font-size:19px;color:var(--ink-soft);max-width:60ch}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{padding:24px;border-radius:22px;background:var(--paper-2);display:flex;flex-direction:column;gap:10px;transition:transform .35s var(--ease)}
+.step:hover{transform:translateY(-4px)}
+.sn{font-family:var(--display);font-weight:800;font-size:15px;color:var(--signal-deep)}
+.step h3{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.03em;margin:0}
+.step p{margin:0;color:var(--ink-soft);font-size:16px}
+.out{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft)}.out b{display:block;font-family:var(--display);font-size:12px;color:var(--muted);margin-bottom:2px}
+.sub{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.03em;margin:64px 0 8px}
+.subp{margin:0 0 24px;color:var(--ink-soft);max-width:62ch}
+.layers{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.layer{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;padding:18px 22px;border-radius:18px;background:var(--paper-2);margin-left:calc(var(--d)*28px)}
+.layer .ln{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:800}
+.layer b{font-family:var(--display);font-size:19px;letter-spacing:-.02em}.layer p{margin:2px 0 0;color:var(--ink-soft);font-size:16px}
+.toks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.tok{all:unset;cursor:copy;display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:18px;background:var(--paper-2);transition:transform .3s var(--ease),box-shadow .2s}
+.tok:hover{transform:translateY(-3px);box-shadow:0 0 0 1.5px var(--line)}
+.tok:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+.tok .chip{height:64px;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line)}
+.tok b{font-family:var(--mono);font-weight:500;font-size:14px}
+.tok .hex{font-family:var(--mono);font-size:12px;color:var(--muted)}.tok .hex .dk{display:none}
+.is-dark .tok .hex .lt{display:none}.is-dark .tok .hex .dk{display:inline}
+.tok .use{font-size:13px;color:var(--ink-soft)}
+.tok .ratio{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.copied{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:12px;font-family:var(--mono);font-size:14px;transition:opacity .25s,transform .35s var(--ease);pointer-events:none;z-index:50}
+.copied.show{opacity:1;transform:translate(-50%,0)}
+.trow{display:grid;grid-template-columns:220px 1fr;gap:24px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.tmeta{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted)}.tmeta b{font-family:var(--display);font-size:15px;color:var(--ink)}
+.trow p{margin:0;overflow-wrap:anywhere}
+.ty-display{font-family:var(--display);font-weight:800;font-size:clamp(44px,7vw,96px);line-height:.86;letter-spacing:-.05em}
+.ty-h2{font-family:var(--display);font-weight:800;font-size:clamp(34px,5vw,64px);line-height:.92;letter-spacing:-.045em}
+.ty-h3{font-family:var(--display);font-weight:800;font-size:32px;line-height:1.05;letter-spacing:-.035em}
+.ty-bl{font-size:20px;line-height:1.5;color:var(--ink-soft)}.ty-b{font-size:17px;color:var(--ink-soft)}.ty-c{font-size:14px;color:var(--muted)}
+.spaces{display:grid;gap:8px}
+.sp{display:grid;grid-template-columns:200px 90px 60px;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.sp .spbar{height:14px;border-radius:4px;background:var(--signal);transform-origin:left;transform:scaleX(0);transition:transform .8s var(--ease)}
+.in .sp .spbar{transform:none}
+.sp code{font-family:var(--mono);color:var(--ink)}
+.radii{display:flex;flex-wrap:wrap;gap:16px}
+.rad{display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.rad span{width:84px;height:84px;background:var(--paper-2);box-shadow:inset 0 0 0 1.5px var(--line)}
+.motion{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.track{position:relative;flex:1;min-width:240px;height:56px;border-radius:999px;background:var(--paper-2)}
+.ball{position:absolute;top:8px;left:8px;width:40px;height:40px;border-radius:50%;background:var(--signal);transition:left .6s var(--ease)}
+.track.go .ball{left:calc(100% - 48px)}
+.demo{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.panel{padding:24px;border-radius:22px;background:var(--paper-2)}
+.panel h4{margin:0 0 4px;font-family:var(--display);font-size:18px}.panel .hint{margin:0 0 18px;font-size:14px;color:var(--muted)}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);margin-bottom:22px;flex-wrap:wrap}
+.seg button{border:0;background:none;cursor:pointer;min-height:36px;padding:0 14px;border-radius:999px;font-family:var(--display);font-weight:700;font-size:13px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.stage{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:14px;border:0;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;transition:background .25s,color .25s,box-shadow .25s,transform .25s}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn:hover,.stage.s-hover .btn{background:var(--signal);color:var(--on-signal);box-shadow:none}
+.stage.s-focus .btn{outline:2px solid var(--signal);outline-offset:3px}
+.stage.s-pressed .btn{transform:scale(.96)}
+.stage.s-disabled .btn{opacity:.38;cursor:not-allowed;background:var(--ink);color:var(--paper)}.stage.s-disabled .btn.ghost{background:transparent;color:var(--ink)}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap}
+.pill{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:transparent;cursor:pointer;font-family:var(--display);font-weight:700;font-size:15px;transition:background .2s,border-color .2s,color .2s}
+.pill:hover{border-color:var(--ink)}.pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.mini{margin-top:18px;padding:16px;border-radius:16px;background:var(--paper);display:flex;gap:12px;align-items:flex-start}
+.mini .dot{width:10px;height:10px;border-radius:50%;background:var(--signal);margin-top:7px;flex:none}
+.mini b{display:block;font-family:var(--display)}.mini span{font-size:14px;color:var(--ink-soft)}
+.code{margin-top:16px;padding:20px;border-radius:18px;background:#1C1814;color:#F4EFE5;font-family:var(--mono);font-size:13px;line-height:1.7;overflow-x:auto}
+.code .c{color:#A39B8E}.code .k{color:#FF8152}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.howlist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.howlist li{padding:16px 0;border-bottom:1px solid var(--line)}.howlist b{font-family:var(--display);font-size:17px}.howlist p{margin:4px 0 0;color:var(--ink-soft);font-size:15px}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.proof div{padding:22px;border-radius:20px;background:var(--paper-2)}.proof b{font-family:var(--display);font-size:19px}.proof p{margin:6px 0 0;color:var(--ink-soft);font-size:15px}.proof span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+.a11y{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.a11y li{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:18px;border-radius:18px;background:var(--paper-2)}
+.ck{width:28px;height:28px;border-radius:50%;background:var(--signal);color:var(--on-signal);display:grid;place-items:center}.ck svg{width:14px;height:14px}
+.a11y b{display:block;font-family:var(--display);font-size:17px}.a11y span{font-size:15px;color:var(--ink-soft)}
+.collab{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.collab li{padding:22px;border-radius:20px;box-shadow:inset 0 0 0 1.5px var(--line);transition:box-shadow .25s,transform .35s var(--ease)}
+.collab li:hover{box-shadow:inset 0 0 0 1.5px var(--signal);transform:translateY(-3px)}
+.collab b{font-family:var(--display);font-size:19px;letter-spacing:-.02em}.collab p{margin:6px 0 0;color:var(--ink-soft);font-size:16px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:left;padding:16px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-size:13px;color:var(--muted);font-weight:500}
+tbody th{font-family:var(--display);font-size:17px;width:30%}td{color:var(--ink-soft);font-size:15px}
+td a{font-family:var(--display);font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}td a:hover{text-decoration-color:var(--signal)}
+.end{padding:96px 0 120px;text-align:center;border-top:1px solid var(--line)}
+.end h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,88px);line-height:.92;letter-spacing:-.05em;margin:0 0 28px}
+.end .row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.reveal.in{opacity:1;transform:none}
+
+/* ---------- theme toggle ---------- */
+.theme-btn{position:relative;width:44px;height:44px;flex:none;border-radius:14px;border:0;cursor:pointer;background:var(--paper-2);color:var(--ink);display:grid;place-items:center;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s}
+.theme-btn:hover{transform:rotate(-8deg) scale(1.06)}
+.theme-btn:active{transform:scale(.92)}
+.theme-btn svg{position:absolute;width:20px;height:20px;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.theme-btn .i-moon{transform:translateY(130%) rotate(-60deg);opacity:0}
+.is-dark .theme-btn .i-sun{transform:translateY(-130%) rotate(90deg);opacity:0}
+.is-dark .theme-btn .i-moon{transform:none;opacity:1}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+.theme-anim,.theme-anim *{transition:background-color .4s ease,color .4s ease,border-color .4s ease,fill .4s ease,box-shadow .4s ease!important}
+
+@media (max-width:900px){.sh{grid-template-columns:1fr;gap:14px}.steps,.proof{grid-template-columns:1fr}.toks{grid-template-columns:1fr 1fr}.demo,.cols2,.a11y,.collab{grid-template-columns:1fr}.trow{grid-template-columns:1fr;gap:6px}.layer{margin-left:calc(var(--d)*10px)}.sp{grid-template-columns:1fr 80px 50px}.who{display:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.sp .spbar{transform:none}}
+</style>
+</head>
+<body>
+<header class="bar"><a class="back" href="/"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Home</a><span class="barright"><span class="who">Simeon Daniel</span><button class="theme-btn" id="themeBtn" type="button" aria-label="Switch to dark mode"><svg class="i-sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 1 1 9.4 4a6.6 6.6 0 0 0 10.6 10.6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></span></header>
+<main>
+<div class="wrap hero">
+  <span class="kick">How I work</span>
+  <h1>Systems that scale, decisions that ship.</h1>
+  <p class="lede">What a team gets when they hire me: a process that starts with the metric, a design system engineers can build from, and work that’s accessible by default.</p>
+  <ul class="jump"><li><a href="#process">Process</a></li><li><a href="#system">Design systems</a></li><li><a href="#a11y">Accessibility</a></li><li><a href="#team">Working with teams</a></li><li><a href="#skills">Skills and proof</a></li></ul>
+</div>
+
+<section id="process"><div class="wrap">
+  <div class="sh reveal"><div><small>01</small><h2>Process</h2></div><p>Six steps, in this order, every time. The step I never skip is the first one: if I can’t name the number a design should move, I’m not ready to design it.</p></div>
+  <ol class="steps"><li class="step reveal"><span class="sn">01</span><h3>Frame the problem</h3><p>Name the business metric to move, and the guardrail metric I refuse to hurt.</p><span class="out"><b>Output</b>A one-page brief with the hypothesis</span></li><li class="step reveal"><span class="sn">02</span><h3>Understand behaviour</h3><p>Interviews, analytics, support tickets, and teardowns of how others solve it.</p><span class="out"><b>Output</b>An insight summary in plain language</span></li><li class="step reveal"><span class="sn">03</span><h3>Map the flow</h3><p>User flows, information architecture, and every edge case: empty, loading, error, and offline.</p><span class="out"><b>Output</b>Flow diagrams in FigJam</span></li><li class="step reveal"><span class="sn">04</span><h3>Design and prototype</h3><p>System components first, then high-fidelity screens and a clickable prototype.</p><span class="out"><b>Output</b>A Figma prototype people can test</span></li><li class="step reveal"><span class="sn">05</span><h3>Test and refine</h3><p>Usability tests on the riskiest moment, and an experiment plan for what can only be learned live.</p><span class="out"><b>Output</b>Findings and an A/B test plan</span></li><li class="step reveal"><span class="sn">06</span><h3>Ship and measure</h3><p>Handoff in Dev Mode, a QA pass with engineers, and events tracked from day one.</p><span class="out"><b>Output</b>A tracking plan and launch checklist</span></li></ol>
+</div></section>
+
+<section id="system"><div class="wrap">
+  <div class="sh reveal"><div><small>02</small><h2>Design systems</h2></div><p>I treat a design system as a product. It has users (designers and engineers), a roadmap, and a definition of done. Its job is to make the right choice the easy one, so teams ship faster without the product drifting apart.</p></div>
+  <h3 class="sub reveal">Five layers I build and maintain</h3>
+  <ol class="layers"><li class="layer reveal" style="--d:0"><span class="ln">1</span><div><b>Tokens</b><p>Colour, type, spacing, radius, elevation, and motion as named variables, each with a light and dark value.</p></div></li><li class="layer reveal" style="--d:1"><span class="ln">2</span><div><b>Components</b><p>Buttons, inputs, cards, and navigation built with variants and properties that match how engineers write them.</p></div></li><li class="layer reveal" style="--d:2"><span class="ln">3</span><div><b>Patterns</b><p>Proven combinations like onboarding steps, paywalls, empty states, and checkout, so teams don’t redesign them each time.</p></div></li><li class="layer reveal" style="--d:3"><span class="ln">4</span><div><b>Documentation</b><p>When to use each piece, when not to, accessibility notes, and do and don’t examples.</p></div></li><li class="layer reveal" style="--d:4"><span class="ln">5</span><div><b>Governance</b><p>A contribution process, versioning, and a changelog, so the system grows without breaking what’s shipped.</p></div></li></ol>
+
+  <h3 class="sub reveal">A live example: this website’s own system</h3>
+  <p class="subp reveal">Everything below is the real system behind this site, not a mockup. Switch between light and dark mode with the button at the top, and every token updates. Click a colour to copy its token.</p>
+  <h4 class="sub reveal" style="font-size:19px;margin-top:32px">Colour tokens, with light and dark values</h4>
+  <div class="toks reveal" id="toks"><button class="tok" data-var="--paper" type="button" aria-label="Copy var(--paper)"><span class="chip" style="background:var(--paper)"></span><b>--paper</b><span class="hex"><span class="lt">#FAF7F0</span><span class="dk">#15130F</span></span><span class="use">Page background</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--paper-2" type="button" aria-label="Copy var(--paper-2)"><span class="chip" style="background:var(--paper-2)"></span><b>--paper-2</b><span class="hex"><span class="lt">#EFEAE0</span><span class="dk">#211E19</span></span><span class="use">Raised surfaces, cards</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--ink" type="button" aria-label="Copy var(--ink)"><span class="chip" style="background:var(--ink)"></span><b>--ink</b><span class="hex"><span class="lt">#1C1814</span><span class="dk">#F4EFE5</span></span><span class="use">Primary text, primary buttons</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--ink-soft" type="button" aria-label="Copy var(--ink-soft)"><span class="chip" style="background:var(--ink-soft)"></span><b>--ink-soft</b><span class="hex"><span class="lt">#4A443C</span><span class="dk">#CFC7B9</span></span><span class="use">Body text</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--muted" type="button" aria-label="Copy var(--muted)"><span class="chip" style="background:var(--muted)"></span><b>--muted</b><span class="hex"><span class="lt">#6B645A</span><span class="dk">#A39B8E</span></span><span class="use">Captions, metadata</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--line" type="button" aria-label="Copy var(--line)"><span class="chip" style="background:var(--line)"></span><b>--line</b><span class="hex"><span class="lt">#DDD5C7</span><span class="dk">#38332B</span></span><span class="use">Borders, dividers</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--signal" type="button" aria-label="Copy var(--signal)"><span class="chip" style="background:var(--signal)"></span><b>--signal</b><span class="hex"><span class="lt">#F2541B</span><span class="dk">#FF6630</span></span><span class="use">Accent, focus, the money moments</span><span class="ratio" data-ratio></span></button><button class="tok" data-var="--signal-deep" type="button" aria-label="Copy var(--signal-deep)"><span class="chip" style="background:var(--signal-deep)"></span><b>--signal-deep</b><span class="hex"><span class="lt">#C9400C</span><span class="dk">#FF8152</span></span><span class="use">Accent text on light surfaces</span><span class="ratio" data-ratio></span></button></div>
+
+  <h4 class="sub reveal" style="font-size:19px">Type scale</h4>
+  <div class="reveal"><div class="trow"><div class="tmeta"><b>Display</b><span>Bricolage Grotesque 800</span><span>clamp(52px, 9vw, 136px) / 0.86</span></div><p class="ty-display">Moments that pay</p></div><div class="trow"><div class="tmeta"><b>Heading 2</b><span>Bricolage Grotesque 800</span><span>clamp(40px, 6vw, 76px) / 0.92</span></div><p class="ty-h2">Every project starts here</p></div><div class="trow"><div class="tmeta"><b>Heading 3</b><span>Bricolage Grotesque 800</span><span>32px / 1.05</span></div><p class="ty-h3">A paid feature with a deadline</p></div><div class="trow"><div class="tmeta"><b>Body large</b><span>Geist 400</span><span>20px / 1.5</span></div><p class="ty-bl">Paywalls that show up when value is felt, not before.</p></div><div class="trow"><div class="tmeta"><b>Body</b><span>Geist 400</span><span>17px / 1.55</span></div><p class="ty-b">Every fee is named, priced, and explained before the button.</p></div><div class="trow"><div class="tmeta"><b>Caption</b><span>Geist 400</span><span>14px / 1.5</span></div><p class="ty-c">2026 · Contract completed</p></div></div>
+
+  <div class="cols2" style="margin-top:56px">
+    <div class="reveal" id="spaceBlock"><h4 class="sub" style="font-size:19px;margin-top:0">Spacing scale</h4><p class="subp">A 4-pixel base, so every gap on the site comes from one list.</p><div class="spaces"><div class="sp"><span class="spbar" style="width:8px"></span><code>space-1</code><span>4px</span></div><div class="sp"><span class="spbar" style="width:16px"></span><code>space-2</code><span>8px</span></div><div class="sp"><span class="spbar" style="width:24px"></span><code>space-3</code><span>12px</span></div><div class="sp"><span class="spbar" style="width:32px"></span><code>space-4</code><span>16px</span></div><div class="sp"><span class="spbar" style="width:48px"></span><code>space-5</code><span>24px</span></div><div class="sp"><span class="spbar" style="width:64px"></span><code>space-6</code><span>32px</span></div><div class="sp"><span class="spbar" style="width:96px"></span><code>space-7</code><span>48px</span></div><div class="sp"><span class="spbar" style="width:144px"></span><code>space-8</code><span>72px</span></div><div class="sp"><span class="spbar" style="width:192px"></span><code>space-9</code><span>96px</span></div></div></div>
+    <div class="reveal"><h4 class="sub" style="font-size:19px;margin-top:0">Radius and motion</h4><p class="subp">Four corner sizes and one shared easing curve keep everything feeling related.</p>
+      <div class="radii"><div class="rad"><span style="border-radius:8px"></span>8px</div><div class="rad"><span style="border-radius:14px"></span>14px</div><div class="rad"><span style="border-radius:22px"></span>22px</div><div class="rad"><span style="border-radius:999px"></span>full</div></div>
+      <div class="motion" style="margin-top:22px"><div class="track" id="track"><span class="ball"></span></div><button class="btn ghost" id="play" type="button">Play the easing</button></div>
+      <p class="subp" style="margin-top:12px;font-family:var(--mono);font-size:13px">--ease: cubic-bezier(.2, .8, .2, 1)</p>
+    </div>
+  </div>
+
+  <h4 class="sub reveal" style="font-size:19px">Components and their states</h4>
+  <div class="demo reveal">
+    <div class="panel"><h4>Button</h4><p class="hint">Two variants. Pick a state to see how each one looks.</p>
+      <div class="seg" role="group" aria-label="Button state"><button type="button" aria-pressed="true" data-s="">Default</button><button type="button" aria-pressed="false" data-s="s-hover">Hover</button><button type="button" aria-pressed="false" data-s="s-focus">Focus</button><button type="button" aria-pressed="false" data-s="s-pressed">Pressed</button><button type="button" aria-pressed="false" data-s="s-disabled">Disabled</button></div>
+      <div class="stage" id="btnStage"><span class="btn">Primary</span><span class="btn ghost">Secondary</span></div></div>
+    <div class="panel"><h4>Filter chip and AI note</h4><p class="hint">Chips toggle with a pressed state. AI suggestions always wear the same marker.</p>
+      <div class="chiprow"><button class="pill" type="button" aria-pressed="true">All</button><button class="pill" type="button" aria-pressed="false">Activate</button><button class="pill" type="button" aria-pressed="false">Monetize</button></div>
+      <div class="mini"><span class="dot" aria-hidden="true"></span><div><b>Suggestion</b><span>The rate has been steady all week. No reason to wait for a better one.</span></div></div></div>
+  </div>
+
+  <h3 class="sub reveal">How I build systems in Figma</h3>
+  <div class="cols2">
+    <ul class="howlist reveal">
+      <li><b>Variables and modes</b><p>Colour, spacing, and radius live as variables, with a light and dark mode, so a theme switch is one click.</p></li>
+      <li><b>Variants and component properties</b><p>States, sizes, and icons are properties, named the way engineers name props in code.</p></li>
+      <li><b>Auto layout everywhere</b><p>Components resize with their content, so the mobile layout is the desktop one reflowed, not a second design.</p></li>
+    </ul>
+    <ul class="howlist reveal">
+      <li><b>Clear naming</b><p>Component / Variant / State, for example Button / Primary / Disabled, so anyone can find what they need.</p></li>
+      <li><b>Documentation pages</b><p>Usage, do and don’t examples, and accessibility notes sit beside each component.</p></li>
+      <li><b>Dev Mode annotations</b><p>Specs, tokens, and behaviour are annotated where engineers look for them.</p></li>
+    </ul>
+  </div>
+
+  <h3 class="sub reveal">How the system reaches code</h3>
+  <p class="subp reveal">Every Figma variable maps one to one to a CSS variable, so design and code use the same names. This is the real code behind the tokens above.</p>
+  <pre class="code reveal"><span class="c">/* Light values, with dark overrides */</span>
+<span class="k">:root</span> { --paper: #FAF7F0; --ink: #1C1814; --signal: #F2541B; --ease: cubic-bezier(.2,.8,.2,1); }
+<span class="k">:root[data-theme="dark"]</span> { --paper: #15130F; --ink: #F4EFE5; --signal: #FF6630; }
+<span class="k">.btn</span> { background: var(--ink); color: var(--paper); border-radius: 14px; min-height: 48px; }</pre>
+
+</div></section>
+
+<section id="a11y"><div class="wrap">
+  <div class="sh reveal"><div><small>03</small><h2>Accessibility by default</h2></div><p>Accessibility isn’t a final check. I build it into the first component, so every screen made from the system inherits it, including on this site.</p></div>
+  <ul class="a11y"><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Contrast</b><span>Text meets WCAG AA: 4.5:1 for body text, 3:1 for large text and UI parts.</span></div></li><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Touch targets</b><span>Anything tappable is at least 44 by 44 pixels.</span></div></li><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Visible focus</b><span>Every interactive element shows a clear focus ring for keyboard users.</span></div></li><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Reduced motion</b><span>Animations switch off for people who ask their device for less motion.</span></div></li><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Never colour alone</b><span>Status always has a label or icon too, not just red or green.</span></div></li><li class="reveal"><span class="ck" aria-hidden="true"><svg viewBox="0 0 14 14" fill="none"><path d="M3 7.5l2.5 2.5L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Plain language</b><span>Errors say what happened and what to do next, without jargon.</span></div></li></ul>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <div class="sh reveal"><div><small>04</small><h2>Working with engineers and product managers</h2></div><p>Good design dies in handoff. These habits keep what ships close to what was designed, and keep everyone moving.</p></div>
+  <ul class="collab"><li class="reveal"><b>Specs engineers can build from</b><p>Every screen ships with its states, spacing, and behaviour annotated in Dev Mode, not left to guesswork.</p></li><li class="reveal"><b>The states checklist</b><p>Empty, loading, error, success, offline, and long-content states are designed before handoff, not discovered in QA.</p></li><li class="reveal"><b>Design QA before release</b><p>I review the build against the design with the engineer and log fixes in priority order.</p></li><li class="reveal"><b>Decisions written down</b><p>Why we chose an option, and what we rejected, lives next to the design, so nobody re-argues it in a month.</p></li></ul>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <div class="sh reveal"><div><small>05</small><h2>Skills and where to see them</h2></div><p>What hiring managers ask for in a product designer, and the place on this site that shows it.</p></div>
+  <div class="tablewrap reveal"><table><thead><tr><th scope="col">Skill</th><th scope="col">The evidence</th><th scope="col">See it</th></tr></thead><tbody><tr><th scope="row">Product thinking and metrics</th><td>Every case study names the metric, the guardrail, and written hypotheses.</td><td><a href="/tidewallet">Tidewallet</a></td></tr><tr><th scope="row">Interaction and visual craft</th><td>Fifteen high-fidelity screens across three very different visual styles.</td><td><a href="/paylark">Paylark</a></td></tr><tr><th scope="row">Design systems</th><td>Tokens, components, and light and dark modes, documented on this page.</td><td><a href="#system">Design systems</a></td></tr><tr><th scope="row">Research and behaviour</th><td>A “What people actually do” section in every case study, grounded in physiology.</td><td><a href="/acany">Acany</a></td></tr><tr><th scope="row">Accessibility</th><td>Built in from the first component.</td><td><a href="#a11y">Accessibility</a></td></tr><tr><th scope="row">AI product design</th><td>Clear rules for when AI explains, suggests, and never acts alone.</td><td><a href="/#ai">How I use AI</a></td></tr><tr><th scope="row">Experimentation</th><td>Events, A/B tests, and success criteria for every case study.</td><td><a href="/tidewallet">Tidewallet</a></td></tr><tr><th scope="row">Collaboration and leadership</th><td>Head of Design at TechyJaunt, and testimonials from founders.</td><td><a href="/#experience">Experience</a></td></tr></tbody></table></div>
+</div></section>
+
+<div class="end"><div class="wrap"><h2>Want a system like this?</h2><div class="row"><a class="btn" href="https://calendly.com/danielsimeon400/30min" target="_blank" rel="noopener">Book a 30-minute call</a><a class="btn ghost" href="/#work">See the case studies</a></div></div></div>
+</main>
+<span class="copied" id="copied" role="status" aria-live="polite"></span>
+<script>
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const cp=document.getElementById('copied');let ct=0;
+  document.querySelectorAll('.tok').forEach(t=>t.addEventListener('click',async()=>{const v='var('+t.dataset.var+')';try{await navigator.clipboard.writeText(v);cp.textContent='Copied '+v;}catch(e){cp.textContent=v;}cp.classList.add('show');clearTimeout(ct);ct=setTimeout(()=>cp.classList.remove('show'),1600);}));
+  function lum(c){const m=c.match(/\d+(\.\d+)?/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*m[0]+.7152*m[1]+.0722*m[2];}
+  function ratios(){const bg=getComputedStyle(document.body).backgroundColor;document.querySelectorAll('.tok').forEach(t=>{const c=getComputedStyle(t.querySelector('.chip')).backgroundColor;const a=lum(c),b=lum(bg);const r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);t.querySelector('[data-ratio]').textContent=t.dataset.var==='--paper'?'Base surface':(r.toFixed(1)+':1 on paper'+(r>=4.5?' · AA text':r>=3?' · AA large':''));});}
+  ratios(); new MutationObserver(()=>setTimeout(ratios,50)).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme','class']});
+  const st=document.getElementById('btnStage');document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));st.className='stage '+b.dataset.s;}));
+  document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('.pill').forEach(x=>x.setAttribute('aria-pressed',x===p));}));
+  const tr=document.getElementById('track');document.getElementById('play').addEventListener('click',()=>tr.classList.toggle('go'));
+  
+})();
+</script>
+<script>
+
+  /* theme */
+  (function(){
+    const btn=document.getElementById('themeBtn'); if(!btn) return;
+    const root=document.documentElement, mq=matchMedia('(prefers-color-scheme: dark)');
+    const current=()=>root.getAttribute('data-theme')||(mq.matches?'dark':'light');
+    function paint(){const d=current()==='dark';root.classList.toggle('is-dark',d);btn.setAttribute('aria-label',d?'Switch to light mode':'Switch to dark mode');const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=d?'#15130F':'#FAF7F0';}
+    function apply(t){root.setAttribute('data-theme',t);try{localStorage.setItem('sd-theme',t)}catch(e){}paint();}
+    paint(); mq.addEventListener&&mq.addEventListener('change',()=>{if(!root.hasAttribute('data-theme'))paint();});
+    btn.addEventListener('click',e=>{
+      const next=current()==='dark'?'light':'dark';
+      const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(document.startViewTransition&&!reduce){
+        const r=btn.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+        const vt=document.startViewTransition(()=>apply(next));
+        vt.ready.then(()=>root.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+R+'px at '+x+'px '+y+'px)']},{duration:650,easing:'cubic-bezier(.2,.8,.2,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});
+      }else{root.classList.add('theme-anim');apply(next);setTimeout(()=>root.classList.remove('theme-anim'),450);}
+    });
+  })();
+
+</script>
+</body>
+</html>
